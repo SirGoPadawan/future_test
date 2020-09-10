@@ -2,4 +2,147 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-size: 16px;
+  font-family: Verdana;
+}
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+ul {
+  padding: 0;
+}
+#root {
+  height: 100vh;
+  background: #f4f2f2;
+}
+.container {
+  margin: 0 auto;
+  width: 1366px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+.add-row {
+  /* #18A0FB */
+  width: 100%;
+}
+.input {
+  outline: none;
+  margin-right: 5px;
+  padding-left: 10px;
+  height: 40px;
+  border-style: solid;
+  border-radius: 5px;
+  &-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  &:valid {
+    border-color: #18a0fb;
+  }
+  &:invalid {
+    border-color: #ff3e1d;
+  }
+}
+.table {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 5px;
+}
+.row {
+  flex-grow: 1;
+  text-align: center;
+  border: 1px solid #18a0fb;
+}
+.btn {
+  outline: none;
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: all 0.5s;
+  &-down,
+  &-up {
+    position: relative;
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid darkgray;
+    &::after {
+      content: "";
+      border: 9px solid transparent;
+      position: absolute;
+      right: 15px;
+    }
+  }
+  &-down {
+    &::after {
+      border-top: 9px solid #18a0fb;
+      top: 13px;
+    }
+  }
+  &-up {
+    &::after {
+      border-bottom: 9px solid #18a0fb;
+      top: 4px;
+    }
+  }
+  &-open {
+    padding: 15px 30px;
+    border: 1px solid #18a0fb;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    &:hover {
+      background-color: aliceblue;
+    }
+  }
+  &-add {
+    border-radius: 5px;
+    padding: 0 10px;
+    border-color: #18a0fb;
+    &:disabled {
+      border-color: gray;
+    }
+  }
+}
+.paginator {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  &-list {
+    display: flex;
+  }
+  &-item {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #18a0fb;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: all 0.5s;
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover {
+      background-color: aliceblue;
+      transition: all 0.5s;
+    }
+  }
+}
+.default {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+}
+.active {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s;
 }
