@@ -1,12 +1,22 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { Route, HashRouter } from "react-router-dom";
+import { render } from "react-dom";
+import { compose, createStore } from "redux";
+import { rootReducer } from "./redux/rootReducer";
+import { Provider } from "react-redux";
 
 import App from "./App";
 
-ReactDOM.render(
-  <HashRouter>
-    <Route path="/" component={App} />
-  </HashRouter>,
-  document.getElementById("root")
+const store = createStore(
+  rootReducer,
+  compose(
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
+
+const app = (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+render(app, document.getElementById("root"));

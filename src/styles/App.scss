@@ -26,8 +26,8 @@ ul {
   align-items: baseline;
 }
 .add-row {
-  /* #18A0FB */
   width: 100%;
+  margin-top: 30px;
 }
 .input {
   outline: none;
@@ -50,14 +50,73 @@ ul {
 }
 .table {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   width: 100%;
-  margin-top: 5px;
+  margin-right: 10px;
+  border-right: 1px solid #18a0fb;
+  padding-right: 10px;
+  & > section {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  &-input {
+    outline: none;
+    padding: 10px 0 10px 10px;
+    border: 1px solid #18a0fb;
+    border-radius: 5px;
+  }
+  &-label {
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
 }
 .row {
-  flex-grow: 1;
-  text-align: center;
-  border: 1px solid #18a0fb;
+  &-top {
+    display: flex;
+    text-align: center;
+    border: 1px solid #18a0fb;
+    border-radius: 10px 10px 0 0;
+    & .btn {
+      &:nth-child(odd) {
+        background: rgba(24, 160, 251, 0.2);
+      }
+      &:first-child {
+        border-radius: 10px 0 0 0;
+      }
+      &:last-child {
+        border-radius: 0 10px 0 0;
+      }
+    }
+  }
+  &-list {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #18a0fb;
+    border-top: none;
+    cursor: pointer;
+    &:last-child {
+      border-radius: 0 0 10px 10px;
+    }
+  }
+  &-item {
+    width: 225px;
+    text-align: center;
+    padding: 15px 0;
+    background: rgba(24, 160, 251, 0.2);
+    &:nth-child(even) {
+      background: #ffffff;
+    }
+  }
+}
+.main {
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
 }
 .btn {
   outline: none;
@@ -66,10 +125,11 @@ ul {
   transition: all 0.5s;
   &-down,
   &-up {
+    flex-grow: 1;
     position: relative;
     width: 100%;
     padding: 10px 20px;
-    border: 1px solid darkgray;
+    border: none;
     &::after {
       content: "";
       border: 9px solid transparent;
@@ -101,9 +161,19 @@ ul {
   &-add {
     border-radius: 5px;
     padding: 0 10px;
-    border-color: #18a0fb;
+    border: 1px solid #18a0fb;
     &:disabled {
       border-color: gray;
+      cursor: default;
+    }
+  }
+  &-search {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #18a0fb;
+    &:hover {
+      background-color: aliceblue;
     }
   }
 }
@@ -136,7 +206,7 @@ ul {
     }
   }
 }
-.default {
+.disable {
   visibility: hidden;
   opacity: 0;
   transition: all 0.5s;
