@@ -1,46 +1,23 @@
-import { CREATE_USER } from "./types";
+import { CREATE_USER, FETCH_SMALL_USERS, FETCH_BIG_USERS } from "./types";
 
 const initialState = {
-  fetchedTable: [
-    {
-      id: 101,
-      firstName: "Sue",
-      lastName: "Corson",
-      email: "DWhalley@in.gov",
-      phone: "(612)211-6296",
-    },
-    {
-      id: 101,
-      firstName: "Sue",
-      lastName: "Corson",
-      email: "DWhalley@in.gov",
-      phone: "(612)211-6296",
-    },
-    {
-      id: 101,
-      firstName: "Sue",
-      lastName: "Corson",
-      email: "DWhalley@in.gov",
-      phone: "(612)211-6296",
-    },
-    {
-      id: 101,
-      firstName: "Sue",
-      lastName: "Corson",
-      email: "DWhalley@in.gov",
-      phone: "(612)211-6296",
-    },
-  ],
+  fetchedTable: [],
 };
 
 export const tableReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_USER:
-      console.log(action.payload);
+    case CREATE_USER: {
       return {
         ...state,
-        fetchedTable: state.fetchedTable.concat([action.payload]),
+        fetchedTable: [action.payload, ...state.fetchedTable],
       };
+    }
+    case FETCH_SMALL_USERS: {
+      return { ...state, fetchedTable: action.payload };
+    }
+    case FETCH_BIG_USERS: {
+      return { ...state, fetchedTable: action.payload };
+    }
     default:
       return state;
   }

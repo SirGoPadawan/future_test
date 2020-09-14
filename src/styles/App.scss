@@ -14,16 +14,43 @@ li {
 ul {
   padding: 0;
 }
-#root {
-  height: 100vh;
-  background: #f4f2f2;
-}
+
 .container {
   margin: 0 auto;
   width: 1366px;
   display: flex;
   flex-direction: column;
   align-items: baseline;
+}
+.modal {
+  &-disabled {
+    display: none;
+  }
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  &-items {
+    background: #ffffff;
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+  &-title {
+    font-size: 1.4em;
+    text-align: center;
+    font-weight: 100;
+  }
 }
 .add-row {
   width: 100%;
@@ -40,6 +67,11 @@ ul {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    & > div {
+      width: 1135px;
+      display: flex;
+      justify-content: space-between;
+    }
   }
   &:valid {
     border-color: #18a0fb;
@@ -48,13 +80,19 @@ ul {
     border-color: #ff3e1d;
   }
 }
+.loader,
 .table {
+  width: 1140px;
   display: flex;
-  flex-direction: column;
-  width: 100%;
   margin-right: 10px;
-  border-right: 1px solid #18a0fb;
   padding-right: 10px;
+  border-right: 1px solid #18a0fb;
+}
+.loader {
+  justify-content: center;
+}
+.table {
+  flex-direction: column;
   & > section {
     display: flex;
     flex-direction: column;
@@ -104,6 +142,7 @@ ul {
     }
   }
   &-item {
+    overflow: hidden;
     width: 225px;
     text-align: center;
     padding: 15px 0;
@@ -162,12 +201,15 @@ ul {
     border-radius: 5px;
     padding: 0 10px;
     border: 1px solid #18a0fb;
+    width: 216px;
     &:disabled {
       border-color: gray;
       cursor: default;
     }
   }
-  &-search {
+  &-search,
+  &-big,
+  &-small {
     margin-top: 20px;
     padding: 10px 20px;
     border-radius: 10px;
@@ -175,6 +217,13 @@ ul {
     &:hover {
       background-color: aliceblue;
     }
+  }
+  &-big,
+  &-small {
+    margin-top: 0;
+  }
+  &-big {
+    margin-right: 5px;
   }
 }
 .paginator {
