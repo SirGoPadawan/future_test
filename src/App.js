@@ -17,13 +17,7 @@ export default function App() {
     setUsers(fetchedUsers);
   }, [fetchedUsers]);
 
-  const filter = (key) => {
-    users.sort(function (a, b) {
-      return a.id - b.id;
-    });
-  };
   const searchUsers = (value) => {
-    console.log(fetchedUsers);
     if (!value) return setUsers(fetchedUsers);
     let findedUsers = users.filter((obj) =>
       Object.values(obj).some(
@@ -41,7 +35,7 @@ export default function App() {
       <Modal />
       <UserList />
       <section className="main">
-        <Table users={users} loading={loading} filter={filter} />
+        <Table users={users} loading={loading} />
         <Search searchUsers={searchUsers} />
       </section>
     </section>
