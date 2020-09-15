@@ -3,7 +3,15 @@ import React, { useState } from "react";
 import Paginator from "./Paginator";
 import Loader from "./Loader";
 
-export default function Table({ users, loading }) {
+export default function Table({ users, loading, filter, checkUser }) {
+  let DEFAULT_SORT = {
+    id: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  };
+  let [obj, setSort] = useState(DEFAULT_SORT);
   let [idPage, setIdPage] = useState(0);
   const elementsOnPage = 50;
   let indexOfFirstPage = elementsOnPage * idPage;
@@ -12,10 +20,18 @@ export default function Table({ users, loading }) {
   const setPageUsers = (id) => {
     setIdPage(Number(id));
   };
+
   let listUserPage = users.slice(indexOfFirstPage, indexOfLastItem);
 
+  const clickUserHandler = (index) => {
+    checkUser(index);
+  };
   const user = listUserPage.map((obj, index) => (
-    <ul key={index} className="row-list">
+    <ul
+      key={index}
+      className="row-list"
+      onClick={() => clickUserHandler(index)}
+    >
       <li className="row-item">{obj.id}</li>
       <li className="row-item">{obj.firstName}</li>
       <li className="row-item">{obj.lastName}</li>
@@ -23,6 +39,24 @@ export default function Table({ users, loading }) {
       <li className="row-item">{obj.phone}</li>
     </ul>
   ));
+
+  const classHandler = (key) => {
+    if (obj[key]) {
+      if (obj[key] === "asc") {
+        return "btn-down";
+      } else {
+        return "btn-up";
+      }
+    }
+  };
+
+  const sortClickHandler = (event) => {
+    let key = event.target.id;
+    filter(key, obj[key]);
+    obj[key] === "asc"
+      ? setSort({ ...DEFAULT_SORT, [event.target.id]: "desc" })
+      : setSort({ ...DEFAULT_SORT, [event.target.id]: "asc" });
+  };
   if (loading) {
     return <Loader />;
   } else {
@@ -30,19 +64,39 @@ export default function Table({ users, loading }) {
       <section className="table">
         <section>
           <div className="row-top">
-            <button name="id" className="btn btn-down">
+            <button
+              id="id"
+              className={`btn btn-def-search ${classHandler("id")}`}
+              onClick={sortClickHandler}
+            >
               ID
             </button>
-            <button name="firstName" className="btn btn-down">
+            <button
+              id="firstName"
+              className={`btn btn-def-search ${classHandler("firstName")}`}
+              onClick={sortClickHandler}
+            >
               First Name
             </button>
-            <button name="lastName" className="btn btn-down">
+            <button
+              id="lastName"
+              className={`btn btn-def-search ${classHandler("lastName")}`}
+              onClick={sortClickHandler}
+            >
               Last Name
             </button>
-            <button name="email" className="btn btn-down">
+            <button
+              id="email"
+              className={`btn btn-def-search ${classHandler("email")}`}
+              onClick={sortClickHandler}
+            >
               Email
             </button>
-            <button name="phone" className="btn btn-down">
+            <button
+              id="phone"
+              className={`btn btn-def-search ${classHandler("phone")}`}
+              onClick={sortClickHandler}
+            >
               Phone
             </button>
           </div>

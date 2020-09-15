@@ -9,7 +9,18 @@ import {
 export function createNewUser(newUser) {
   return {
     type: CREATE_USER,
-    payload: newUser,
+    payload: {
+      ...newUser,
+      ...{
+        address: {
+          city: "",
+          state: "",
+          streetAddress: "",
+          zip: "",
+        },
+        description: "",
+      },
+    },
   };
 }
 export function showLoader() {
